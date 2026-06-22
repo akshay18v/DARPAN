@@ -1,0 +1,18 @@
+# 1. Ignore all raw images and processed data
+data/raw/**/*
+data/processed/**/*
+
+# 2. Ignore heavy AI models
+models/**/*.pt
+models/**/*.bin
+
+# 3. Ignore drivers and environment files
+selenium/drivers/*.exe
+**/venv/
+.env
+__pycache__/
+logs/*.log
+
+# 4. THE EXCEPTION (Important!)
+# This tells Git: "Ignore the folders above, but KEEP the .gitkeep files"
+!.gitkeep
