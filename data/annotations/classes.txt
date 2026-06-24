@@ -4,3 +4,4 @@ sneaking
 misdirection
 interface_interference
 obstruction
+git add data/annotations/classes.txt
