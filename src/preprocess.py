@@ -1,6 +1,7 @@
 import cv2
 import os
 
+
 def preprocess_image(image_path, save_path=None):
     img = cv2.imread(image_path)
 
@@ -26,38 +27,44 @@ def preprocess_image(image_path, save_path=None):
 
 
 if __name__ == "__main__":
+
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    test_image = os.path.join(
-        base_dir,
-        "data",
-        "raw",
-        "airbnb",
-        "airbnb_3.png"
-    )
+    raw_dir = os.path.join(base_dir, "data", "raw")
+    processed_dir = os.path.join(base_dir, "data", "processed")
 
-    processed_image_path = os.path.join(
-        base_dir,
-        "data",
-        "processed",
-        "airbnb",
-        "airbnb_0_processed.png"
-    )
+    print("Starting preprocessing...")
 
-    try:
-        original, processed = preprocess_image(
-            test_image,
-            processed_image_path
-        )
+    for platform in os.listdir(raw_dir):
 
-        print("Image preprocessing successful!")
-        print(f"Saved to: {processed_image_path}")
+        platform_path = os.path.join(raw_dir, platform)
 
-        cv2.imshow("Original Image", original)
-        cv2.imshow("Preprocessed Image", processed)
+        if not os.path.isdir(platform_path):
+            continue
 
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        output_platform_dir = os.path.join(processed_dir, platform)
+        os.makedirs(output_platform_dir, exist_ok=True)
 
-    except Exception as e:
-        print(f"Error: {e}")
+        print(f"\nProcessing {platform}...")
+
+        for img_name in os.listdir(platform_path):
+
+            if img_name.lower().endswith(('.png', '.jpg', '.jpeg')):
+
+                img_path = os.path.join(platform_path, img_name)
+
+                base_name = os.path.splitext(img_name)[0]
+
+                save_path = os.path.join(
+                    output_platform_dir,
+                    f"{base_name}_processed.png"
+                )
+
+                try:
+                    preprocess_image(img_path, save_path)
+                    print(f"Processed: {img_name}")
+
+                except Exception as e:
+                    print(f"Error processing {img_name}: {e}")
+
+    print("\nAll images preprocessed successfully!")
