@@ -1,8 +1,15 @@
 import os
 import time
-from selenium import webdriver
+from pathlib import Path
 
-# 1. Targets
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+# ======================================================
+# 1. TARGET WEBSITES
+# ======================================================
+
 SITES = {
     "1": {"name": "airbnb", "url": "https://www.airbnb.co.in/"},
     "2": {"name": "makemytrip", "url": "https://www.makemytrip.com/"},
@@ -11,67 +18,116 @@ SITES = {
     "5": {"name": "cleartrip", "url": "https://www.cleartrip.com/"}
 }
 
-# 2. Selection
+# ======================================================
+# 2. WEBSITE SELECTION
+# ======================================================
+
 print("Which website are you capturing today?")
+
 for key, info in SITES.items():
     print(f"{key}. {info['name'].capitalize()}")
 
-choice = input("Enter number (1-5): ")
+choice = input("Enter number (1-5): ").strip()
+
 if choice not in SITES:
+    print("Invalid choice.")
     exit()
 
 site_name = SITES[choice]["name"]
 target_url = SITES[choice]["url"]
 
-# 3. Dynamic Folder
-BASE_DIR = f"../../data/raw/{site_name}"
-os.makedirs(BASE_DIR, exist_ok=True)
+# ======================================================
+# 3. PROJECT PATH (FIXED)
+# ======================================================
 
-# --- STEP 4: SMART COUNT (REPLACES count = 0) ---
-# Get list of all png files in the folder that start with the site name
-existing_files = [f for f in os.listdir(BASE_DIR) if f.startswith(site_name) and f.endswith('.png')]
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent.parent
+
+BASE_DIR = PROJECT_ROOT / "data" / "raw" / site_name
+BASE_DIR.mkdir(parents=True, exist_ok=True)
+
+# ======================================================
+# 4. SMART COUNT
+# ======================================================
+
+existing_files = [
+    f.name
+    for f in BASE_DIR.glob("*.png")
+    if f.name.startswith(site_name)
+]
 
 if not existing_files:
     count = 0
 else:
-    # 1. f.split('_')[-1] gets '0.png'
-    # 2. .split('.')[0] gets '0'
-    # 3. int() converts it to a number
-    indices = [int(f.split('_')[-1].split('.')[0]) for f in existing_files]
-    count = max(indices) + 1
+    indices = []
+
+    for file in existing_files:
+        try:
+            index = int(file.split("_")[-1].split(".")[0])
+            indices.append(index)
+        except ValueError:
+            pass
+
+    count = max(indices) + 1 if indices else 0
 
 print(f"\n🚀 Target locked: {site_name.upper()}")
-print(f"📂 Found {len(existing_files)} files. Starting from index: {count}")
-# -----------------------------------------------
+print(f"📂 Saving screenshots inside:")
+print(BASE_DIR)
+print(f"\n📂 Found {len(existing_files)} files.")
+print(f"📸 Starting from index: {count}")
 
-# 5. Start Browser
-driver = webdriver.Chrome()
+# ======================================================
+# 5. START CHROME
+# ======================================================
+
+print("\nOpening Chrome...")
+
+driver = webdriver.Chrome(
+    service=Service(ChromeDriverManager().install())
+)
+
 driver.maximize_window()
+
 driver.get(target_url)
 
-print("Press ENTER to capture, 'q' to quit.")
+print("Chrome opened successfully.")
+print("\nPress ENTER to capture.")
+print("Type 'q' then ENTER to quit.\n")
 
-# 6. Capture Loop
+# ======================================================
+# 6. CAPTURE LOOP
+# ======================================================
+
 while True:
+
     user_input = input()
 
-    if user_input.lower() == 'q':
+    if user_input.lower() == "q":
         break
 
     try:
+
         driver.switch_to.window(driver.window_handles[-1])
-        time.sleep(1) 
+
+        time.sleep(1)
 
         filename = f"{site_name}_{count}.png"
-        path = os.path.join(BASE_DIR, filename)
 
-        driver.save_screenshot(path)
-        print(f"📸 Saved: {path}")
+        path = BASE_DIR / filename
 
-        count += 1
+        success = driver.save_screenshot(str(path))
+
+        if success:
+            print(f"📸 Saved: {filename}")
+            print(f"📂 Location: {path.resolve()}")
+            count += 1
+        else:
+            print("Screenshot could not be saved.")
+
     except Exception as e:
         print(f"Error: {e}")
         break
 
 driver.quit()
-print("Session ended. Great job, bhai!")
+
+print("\nSession ended. Great job, bhai!")
