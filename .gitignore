@@ -1,15 +1,15 @@
-
-# 2. Ignore heavy AI models
-models/**/*.pt
-models/**/*.bin
-
-# 3. Ignore drivers and environment files
-selenium/drivers/*.exe
-**/venv/
-.env
+# Python
 __pycache__/
-logs/*.log
+*.pyc
 
-# 4. THE EXCEPTION (Important!)
-# This tells Git: "Ignore the folders above, but KEEP the .gitkeep files"
-!.gitkeep
+# YOLO training outputs
+runs/
+
+# Temporary/local comparison data
+hotel_comparison/
+
+# Local YOLO pretrained checkpoint
+yolov8n.pt
+
+# Dataset cache files
+data/yolo_dataset/labels/*.cache

@@ -1,0 +1,15 @@
+path: D:/DARPAN/data/yolo_dataset
+
+train: images/train
+val: images/val
+test: images/test
+
+nc: 6
+
+names:
+  0: hidden_fees
+  1: false_urgency
+  2: sneaking
+  3: misdirection
+  4: interface_interference
+  5: obstruction
