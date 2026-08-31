@@ -9,7 +9,7 @@ from tqdm import tqdm
 # Tesseract Path
 # ==========================================
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = r"D:\Tesseract-OCR\tesseract.exe"
 
 # ==========================================
 # Project Paths

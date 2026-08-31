@@ -13,7 +13,7 @@ PROJECT_ROOT = os.path.abspath(
 )
 
 # Tesseract installation path
-TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+TESSERACT_PATH = r"D:\Tesseract-OCR\tesseract.exe"
 
 pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
 

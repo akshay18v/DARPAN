@@ -4,6 +4,7 @@ import re
 import cv2
 import torch
 import pytesseract
+import json
 
 from difflib import SequenceMatcher
 
@@ -65,9 +66,8 @@ MODEL_DIR = os.path.join(
 )
 
 TESSERACT_PATH = (
-    r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    r"D:\Tesseract-OCR\tesseract.exe"
 )
-
 pytesseract.pytesseract.tesseract_cmd = (
     TESSERACT_PATH
 )
@@ -3518,27 +3518,41 @@ def analyze_image(
     )
 
 
-    print(
-        "\nPrimary Pattern:",
-        ranked[0][0]
-    )
+    if ranked:
+
+        print(
+            "\nPrimary Pattern:",
+            ranked[0][0]
+        )
+
+        print(
+            "Primary Confidence:",
+            f"{ranked[0][1]['best_confidence'] * 100:.2f}%"
+        )
+
+        print(
+            "Primary Evidence Score:",
+            f"{ranked[0][1]['signals']:.2f}"
+        )
+
+    else:
+
+        print(
+            "\nPrimary Pattern: None"
+        )
+
+        print(
+            "Primary Confidence: 0.00%"
+        )
+
+        print(
+            "Primary Evidence Score: 0.00"
+        )
 
 
-    print(
-        "Primary Confidence:",
-        f"{ranked[0][1]['best_confidence'] * 100:.2f}%"
-    )
-
-
-    print(
-        "Primary Evidence Score:",
-        f"{ranked[0][1]['signals']:.2f}"
-    )
-
-
-    print(
-        "\nAll Detected Patterns:"
-    )
+        print(
+            "\nAll Detected Patterns:"
+        )
 
 
     for label, info in ranked:
@@ -3566,6 +3580,94 @@ def analyze_image(
         "=" * 75
     )
 
+    # ========================================================
+    # STRUCTURED RESULT
+    # ========================================================
+
+    patterns = []
+
+    for label, info in ranked:
+
+        patterns.append({
+            "label": label,
+
+            "confidence": round(
+                info["best_confidence"],
+                4
+            ),
+
+            "confidence_percent": round(
+                info["best_confidence"] * 100,
+                2
+            ),
+
+            "evidence_score": round(
+                info["signals"],
+                2
+            ),
+
+            "supporting_chunks": info["chunks"],
+
+            "best_semantic_score": round(
+                info["best_semantic"],
+                4
+            ),
+
+            "supporting_text": info["best_text"],
+
+            "exact_evidence": info["exact_matches"],
+
+            "fuzzy_evidence": info["fuzzy_matches"],
+
+            "semantic_evidence": info["semantic_matches"]
+        })
+
+
+    structured_result = {
+
+        "image_path": str(
+            image_path
+        ),
+
+        "text_model": "DistilBERT",
+
+        "ocr_text": "",
+
+        "total_chunks": len(
+            chunks
+        ),
+
+        "dark_pattern_detected": (
+            len(patterns) > 0
+        ),
+
+        "total_patterns_detected": len(
+            patterns
+        ),
+
+        "primary_pattern": (
+            patterns[0]["label"]
+            if patterns
+            else None
+        ),
+
+        "primary_confidence": (
+            patterns[0]["confidence"]
+            if patterns
+            else 0.0
+        ),
+
+        "primary_evidence_score": (
+            patterns[0]["evidence_score"]
+            if patterns
+            else 0.0
+        ),
+
+        "patterns": patterns
+    }
+
+
+    return structured_result
 
 # ============================================================
 # COMMAND LINE
