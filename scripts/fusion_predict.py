@@ -504,26 +504,17 @@ def fuse_class(
             and text_conf >= 0.75
             and evidence >= 3.0
         ):
-
-            return True, (
-                "Explicit textual fee evidence"
-            )
+            return True, "Explicit textual fee evidence"
 
         if yolo_conf >= 0.70:
-
-            return True, (
-                "Strong YOLO visual detection"
-            )
+            return True, "Strong YOLO visual detection"
 
         if (
             yolo_conf >= 0.45
             and text_present
             and text_conf >= 0.70
         ):
-
-            return True, (
-                "YOLO and text models agree"
-            )
+            return True, "YOLO and text models agree"
 
         return False, "Insufficient evidence"
 
@@ -582,34 +573,46 @@ def fuse_class(
 
     if label == "misdirection":
 
-    # Strong YOLO evidence
-        if yolo_conf >= 0.65:
+        # ----------------------------------------------------
+        # 1. Strong direct YOLO evidence
+        # ----------------------------------------------------
 
+        if yolo_conf >= 0.70:
             return True, (
                 "Strong YOLO visual detection"
             )
 
-        # Moderate YOLO evidence supported by text
-        if (
-            yolo_conf >= 0.45
-            and text_present
-            and text_conf >= 0.65
-        ):
+        # ----------------------------------------------------
+        # 2. Strong direct text evidence
+        # ----------------------------------------------------
 
-            return True, (
-                "YOLO detection supported by text model"
-            )
-
-        # Strong textual evidence
         if (
             text_present
             and text_conf >= 0.85
             and evidence >= 3.0
             and semantic >= 0.82
         ):
-
             return True, (
                 "Strong textual and semantic evidence"
+            )
+
+        # ----------------------------------------------------
+        # 3. Possible interface/misdirection confusion
+        #
+        # Do NOT automatically convert interface into
+        # misdirection.
+        #
+        # Require strong visual interface evidence AND
+        # reasonably strong textual support.
+        # ----------------------------------------------------
+
+        if (
+            yolo_conf >= 0.70
+            and text_present
+            and text_conf >= 0.80
+        ):
+            return True, (
+                "Strong visual and textual evidence"
             )
 
         return False, "Insufficient evidence"
