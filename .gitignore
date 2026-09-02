@@ -19,6 +19,7 @@ venv/
 env/
 .venv/
 # Local test screenshots
+<<<<<<< HEAD
 data/test_images/
 darpan-extension/node_modules/
 
@@ -38,3 +39,10 @@ models/
 models/
 *.safetensors
 *.bin
+=======
+data/test_images/
+>>>>>>> origin/main
+
+# Ignore raw scrape images and splits
+data/raw/
+data/processed/darpan_final_splits/
