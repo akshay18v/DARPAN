@@ -28,3 +28,13 @@ models/**/checkpoint-*/
 
 # Ignore local YOLO dataset images
 data/yolo_dataset/images/
+
+# Ignore local model weights
+models/
+*.safetensors
+*.bin
+
+# Ignore local model weights
+models/
+*.safetensors
+*.bin
