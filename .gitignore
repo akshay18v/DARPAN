@@ -21,3 +21,10 @@ env/
 # Local test screenshots
 data/test_images/
 darpan-extension/node_modules/
+
+# Ignore large model checkpoints and optimizer states
+models/**/checkpoint-*/
+*.pt
+
+# Ignore local YOLO dataset images
+data/yolo_dataset/images/
