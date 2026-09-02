@@ -1,0 +1,8 @@
+,false_urgency,hidden_fees,interface_interference,misdirection,normal,obstruction,sneaking
+false_urgency,9,0,0,2,0,1,0
+hidden_fees,1,10,0,0,0,0,0
+interface_interference,0,0,9,1,0,0,2
+misdirection,1,0,4,6,1,0,0
+normal,0,0,1,0,11,0,0
+obstruction,0,0,3,0,0,9,0
+sneaking,0,0,4,2,0,0,6

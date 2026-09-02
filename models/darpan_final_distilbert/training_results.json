@@ -1,0 +1,14 @@
+{
+    "model": "distilbert-base-uncased",
+    "epochs": 5,
+    "batch_size": 8,
+    "learning_rate": 2e-05,
+    "train_samples": 660,
+    "validation_samples": 83,
+    "test_samples": 83,
+    "best_validation_f1": 0.7650930889297629,
+    "test_accuracy": 0.7228915662650602,
+    "test_precision": 0.7627288374276326,
+    "test_recall": 0.7228915662650602,
+    "test_f1": 0.7312289247333773
+}

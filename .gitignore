@@ -19,30 +19,14 @@ venv/
 env/
 .venv/
 # Local test screenshots
-<<<<<<< HEAD
 data/test_images/
-darpan-extension/node_modules/
-
-# Ignore large model checkpoints and optimizer states
-models/**/checkpoint-*/
+# Ignore local model weights
+models/
+*.safetensors
+*.bin
 *.pt
 
-# Ignore local YOLO dataset images
+# Ignore local YOLO dataset and raw images
 data/yolo_dataset/images/
-
-# Ignore local model weights
-models/
-*.safetensors
-*.bin
-
-# Ignore local model weights
-models/
-*.safetensors
-*.bin
-=======
-data/test_images/
->>>>>>> origin/main
-
-# Ignore raw scrape images and splits
 data/raw/
 data/processed/darpan_final_splits/

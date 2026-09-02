@@ -1,0 +1,20 @@
+{
+    "label2id": {
+        "false_urgency": 0,
+        "hidden_fees": 1,
+        "interface_interference": 2,
+        "misdirection": 3,
+        "normal": 4,
+        "obstruction": 5,
+        "sneaking": 6
+    },
+    "id2label": {
+        "0": "false_urgency",
+        "1": "hidden_fees",
+        "2": "interface_interference",
+        "3": "misdirection",
+        "4": "normal",
+        "5": "obstruction",
+        "6": "sneaking"
+    }
+}
