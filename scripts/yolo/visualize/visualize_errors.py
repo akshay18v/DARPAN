@@ -17,7 +17,7 @@ print("=" * 70)
 # ------------------------------------------------------------
 
 MODEL_PATH = Path(
-    r"D:\DARPAN\runs\darpan_yolov8n\weights\best.pt"
+    r"D:\DARPAN\runs\darpan_yolov8n-2\weights\best.pt"
 )
 
 DATA_YAML = Path(
@@ -25,9 +25,8 @@ DATA_YAML = Path(
 )
 
 OUTPUT_DIR = Path(
-    r"D:\DARPAN\runs\error_analysis\visualizations"
+    r"D:\DARPAN\runs\error_analysis\visualizations_yolov8n_new"
 )
-
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # ------------------------------------------------------------

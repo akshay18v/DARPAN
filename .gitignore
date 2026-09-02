@@ -13,3 +13,11 @@ yolov8n.pt
 
 # Dataset cache files
 data/yolo_dataset/labels/*.cache
+
+
+venv/
+env/
+.venv/
+# Local test screenshots
+data/test_images/
+darpan-extension/node_modules/
