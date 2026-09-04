@@ -66,7 +66,7 @@ MODEL_DIR = os.path.join(
 )
 
 TESSERACT_PATH = (
-    r"D:\Tesseract-OCR\tesseract.exe"
+   r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 )
 pytesseract.pytesseract.tesseract_cmd = (
     TESSERACT_PATH

@@ -1,0 +1,175 @@
+﻿@'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StayEase • Luxury Resort & Spa Bookings</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: #f8fafc; color: #1e293b; line-height: 1.5; padding-bottom: 60px; }
+    
+    /* Top Navigation */
+    .navbar { background: #0f172a; color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; }
+    .brand span { color: #38bdf8; }
+    .nav-links { display: flex; gap: 24px; font-size: 14px; font-weight: 500; }
+    .nav-links a { color: #cbd5e1; text-decoration: none; }
+    
+    /* Search Bar Banner */
+    .hero-search { background: #1e293b; color: white; padding: 24px 40px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .search-input { background: #334155; border: 1px solid #475569; padding: 10px 16px; border-radius: 6px; color: white; font-size: 14px; flex: 1; min-width: 180px; }
+    .search-btn { background: #2563eb; color: white; border: none; padding: 10px 24px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+
+    /* Layout */
+    .container { max-width: 1180px; margin: 32px auto; padding: 0 20px; display: grid; grid-template-columns: 260px 1fr; gap: 32px; }
+
+    /* Sidebar Filters */
+    .sidebar { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; height: fit-content; }
+    .sidebar h3 { font-size: 15px; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; color: #475569; }
+    .filter-group { margin-bottom: 20px; }
+    .filter-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .filter-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #64748b; margin-bottom: 6px; }
+
+    /* Results Column */
+    .results-header { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .results-header h1 { font-size: 22px; font-weight: 800; color: #0f172a; }
+    
+    /* Hotel Cards */
+    .hotel-card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; display: grid; grid-template-columns: 260px 1fr; overflow: hidden; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .hotel-img-placeholder { background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%); display: flex; align-items: center; justify-content: center; color: #475569; font-weight: 700; font-size: 14px; height: 100%; min-height: 220px; }
+    .hotel-details { padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
+    
+    .hotel-title { font-size: 18px; font-weight: 700; color: #0f172a; }
+    .location { font-size: 13px; color: #64748b; margin-bottom: 8px; }
+    .rating-badge { display: inline-flex; align-items: center; background: #0f172a; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; gap: 4px; margin-bottom: 12px; }
+    
+    /* DARK PATTERNS STYLING */
+    .dark-pattern-urgency { display: inline-block; background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px; margin-bottom: 10px; }
+    .dark-pattern-social { font-size: 12px; color: #e11d48; font-weight: 600; display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
+    
+    /* Pricing & Actions */
+    .pricing-strip { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; }
+    .price-value { font-size: 24px; font-weight: 800; color: #0f172a; }
+    .price-sub { font-size: 12px; color: #64748b; }
+    .book-btn { background: #2563eb; color: white; padding: 10px 20px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; }
+    .book-btn:hover { background: #1d4ed8; }
+
+    /* Checkbox Preselection Dark Pattern */
+    .preselected-addon { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 12px; margin-top: 14px; font-size: 12px; display: flex; align-items: center; justify-content: space-between; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="brand">StayEase <span>• Travel</span></div>
+    <nav class="nav-links">
+      <a href="#">Hotels</a>
+      <a href="#">Flights</a>
+      <a href="#">Car Rental</a>
+      <a href="#">My Bookings</a>
+    </nav>
+  </header>
+
+  <!-- Search Filter Toolbar -->
+  <section class="hero-search">
+    <input class="search-input" type="text" value="Goa, India" readonly />
+    <input class="search-input" type="text" value="10 Oct - 14 Oct (4 Nights)" readonly />
+    <input class="search-input" type="text" value="2 Guests • 1 Room" readonly />
+    <button class="search-btn">Modify Search</button>
+  </section>
+
+  <!-- Main Content Layout -->
+  <main class="container">
+    
+    <!-- Left Filter Sidebar -->
+    <aside class="sidebar">
+      <h3>Filters</h3>
+      <div class="filter-group">
+        <div class="filter-title">Price Range per night</div>
+        <div class="filter-item"><input type="checkbox" checked readOnly /> ₹2,000 - ₹5,000</div>
+        <div class="filter-item"><input type="checkbox" /> ₹5,000 - ₹10,000</div>
+        <div class="filter-item"><input type="checkbox" /> ₹10,000+</div>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-title">Popular Amenities</div>
+        <div class="filter-item"><input type="checkbox" checked readOnly /> Free Wi-Fi</div>
+        <div class="filter-item"><input type="checkbox" checked readOnly /> Swimming Pool</div>
+        <div class="filter-item"><input type="checkbox" /> Breakfast Included</div>
+      </div>
+    </aside>
+
+    <!-- Property Listings -->
+    <section>
+      <div class="results-header">
+        <h1>Properties found in Goa</h1>
+        <span style="font-size: 14px; color: #64748b;">Showing 2 of 42 properties</span>
+      </div>
+
+      <!-- CARD 1: DARK PATTERNS (Urgency / Scarcity / High Demand) -->
+      <article class="hotel-card">
+        <div class="hotel-img-placeholder">Oceanfront View</div>
+        <div class="hotel-details">
+          <div>
+            <!-- Dark Pattern: False Urgency / Scarcity -->
+            <span class="dark-pattern-urgency">Only 2 rooms left at this price!</span>
+            <h2 class="hotel-title">Grand Palm Bay Resort & Spa</h2>
+            <div class="location">Calangute, North Goa • 150m from Beach</div>
+            <div class="rating-badge">★ 4.8 / 5 <span>(1,240 reviews)</span></div>
+            
+            <!-- Dark Pattern: Social Proof Scarcity -->
+            <div class="dark-pattern-social">
+              🔥 26 travelers are looking at this property right now
+            </div>
+            <p style="font-size: 13px; color: #475569;">
+              Enjoy complimentary breakfast, beach access, airport shuttle, and outdoor swimming pool.
+            </p>
+          </div>
+
+          <!-- Pre-selected Insurance (Sneaking / Pre-selection Pattern) -->
+          <div class="preselected-addon">
+            <span>Add Trip Cancellation Guard (₹499 per guest)</span>
+            <input type="checkbox" checked readOnly />
+          </div>
+
+          <div class="pricing-strip">
+            <div>
+              <div class="price-value">₹4,890</div>
+              <div class="price-sub">+ ₹450 taxes & fees • per night</div>
+            </div>
+            <button class="book-btn">Reserve Room</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 2: CLEAN / NORMAL LISTING (Control comparison) -->
+      <article class="hotel-card">
+        <div class="hotel-img-placeholder">Garden View</div>
+        <div class="hotel-details">
+          <div>
+            <h2 class="hotel-title">Whispering Palms Boutique Hotel</h2>
+            <div class="location">Candolim, Goa • 400m from city center</div>
+            <div class="rating-badge">★ 4.3 / 5 <span>(580 reviews)</span></div>
+            <p style="font-size: 13px; color: #475569;">
+              Spacious air-conditioned rooms, free high-speed Wi-Fi, 24-hour reception, and garden-side cafe.
+            </p>
+          </div>
+
+          <div class="pricing-strip">
+            <div>
+              <div class="price-value">₹3,150</div>
+              <div class="price-sub">Total price including taxes • per night</div>
+            </div>
+            <button class="book-btn">Reserve Room</button>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+</body>
+</html>
+'@ | Set-Content -Path "test.html" -Encoding UTF8

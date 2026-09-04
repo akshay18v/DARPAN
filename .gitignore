@@ -30,3 +30,8 @@ models/
 data/yolo_dataset/images/
 data/raw/
 data/processed/darpan_final_splits/
+runs/darpan_yolov8n-2/weights/best.pt
+
+dist/
+darpan-extension/dist/
+
