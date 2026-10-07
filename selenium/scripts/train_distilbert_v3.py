@@ -46,14 +46,6 @@ LABELS = [
     "interface interference",
     "misdirection",
     "obstruction",
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "potential false urgency"
-=======
->>>>>>> a207492 (training and urgency detector)
-=======
-    "potential false urgency"
->>>>>>> 0d153c6 (dataset)
 ]
 
 LABEL2ID = {
