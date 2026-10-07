@@ -17,7 +17,7 @@ from ultralytics import YOLO
 # 1. PATHS
 # ============================================================
 
-PROJECT_ROOT = Path(r"D:\DARPAN")
+PROJECT_ROOT = PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 YOLO_MODEL_PATH = (
     PROJECT_ROOT

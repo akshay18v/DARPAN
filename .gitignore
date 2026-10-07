@@ -20,3 +20,18 @@ env/
 .venv/
 # Local test screenshots
 data/test_images/
+# Ignore local model weights
+models/
+*.safetensors
+*.bin
+*.pt
+
+# Ignore local YOLO dataset and raw images
+data/yolo_dataset/images/
+data/raw/
+data/processed/darpan_final_splits/
+runs/darpan_yolov8n-2/weights/best.pt
+
+dist/
+darpan-extension/dist/
+
