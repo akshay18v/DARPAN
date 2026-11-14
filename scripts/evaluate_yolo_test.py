@@ -72,6 +72,7 @@ results = model.val(
     verbose=True,
 )
 
+
 # ------------------------------------------------------------
 # 5. RESULTS
 # ------------------------------------------------------------
@@ -80,7 +81,21 @@ print("\n" + "=" * 70)
 print("TEST SET EVALUATION COMPLETED")
 print("=" * 70)
 
-print("\nTest images: 43")
+# Dynamically count test images
+TEST_IMAGES_DIR = Path(
+    r"D:\DARPAN\data\yolo_dataset\images\test"
+)
+
+IMAGE_EXTENSIONS = {
+    ".jpg", ".jpeg", ".png", ".bmp", ".webp", ".tif", ".tiff"
+}
+
+test_images = [
+    p for p in TEST_IMAGES_DIR.rglob("*")
+    if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS
+]
+
+print(f"\nTest images: {len(test_images)}")
 
 print("\nOverall metrics:")
 
@@ -90,7 +105,7 @@ print(f"mAP50     : {results.box.map50:.4f}")
 print(f"mAP50-95  : {results.box.map:.4f}")
 
 print("\nResults saved to:")
-print(r"D:\DARPAN\runs\test_evaluation")
+print(results.save_dir)
 
 print("\n✓ Test evaluation completed.")
 print("✓ The model was NOT retrained.")
